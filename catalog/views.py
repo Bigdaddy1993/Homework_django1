@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from catalog.models import Product
+
 
 # Create your views here.
 def contacts(request):
@@ -12,4 +14,18 @@ def contacts(request):
 
 
 def home(request):
-    return render(request, 'catalog/home.html')
+    content = {
+        'object_list': Product.objects.all(),
+    }
+    return render(request, 'catalog/home.html', content)
+
+
+def pk(request, pk):
+    content = {
+        'object_list': Product.objects.get(pk=pk),
+    }
+    return render(request, 'catalog/pk.html', content)
+
+
+def base(request):
+    return render(request, 'catalog/base.html')

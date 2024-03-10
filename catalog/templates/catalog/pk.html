@@ -1,0 +1,21 @@
+{% extends 'catalog/base.html' %}
+{% load image_tag %}
+{% block title %} О товаре {% endblock %}
+{% block content %}
+<div class="row text-center">
+    <div class="col-3">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">{{ object_list.name }}</h4>
+            </div>
+            <div class="card-body">
+                <img class="card-img-top"
+                     src="/media/{{ object_list.image }}"
+                     alt="Card image cap">
+                <p class="card-text">Стоимость: {{ object_list.price }} р</p>
+                <p class="card-text">Описание: {{ object_list.description | truncatechars:100}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
