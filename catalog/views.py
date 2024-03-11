@@ -20,12 +20,8 @@ def home(request):
     return render(request, 'catalog/home.html', content)
 
 
-def pk(request, pk):
+def product_from_pk(request, pk):
     content = {
         'object_list': Product.objects.get(pk=pk),
     }
-    return render(request, 'catalog/pk.html', content)
-
-
-def base(request):
-    return render(request, 'catalog/base.html')
+    return render(request, 'catalog/product_from_pk.html', content)

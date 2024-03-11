@@ -15,7 +15,7 @@
                 <p class="card-text">Стоимость: {{ object.price }} р</p>
                 <p class="card-text">Категория: {{ object.category }} </p>
                 <p class="card-text">Описание: {{ object.description | truncatechars:100}}</p>
-                <a href="{% url 'catalog:pk' object.pk %}">Подробнее</a>
+                <a href="{% url 'catalog:product_from_pk' object.pk %}">Подробнее</a>
             </div>
         </div>
     </div>

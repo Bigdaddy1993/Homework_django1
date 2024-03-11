@@ -10,7 +10,7 @@
             </div>
             <div class="card-body">
                 <img class="card-img-top"
-                     src="/media/{{ object_list.image }}"
+                     src="{% mymedia object_list.image %}"
                      alt="Card image cap">
                 <p class="card-text">Стоимость: {{ object_list.price }} р</p>
                 <p class="card-text">Описание: {{ object_list.description | truncatechars:100}}</p>
