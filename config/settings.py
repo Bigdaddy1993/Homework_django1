@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     'catalog',
     'django_dump_load_utf8',
+    'materials',
 ]
 
 MIDDLEWARE = [

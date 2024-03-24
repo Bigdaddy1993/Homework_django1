@@ -6,14 +6,14 @@
     <div class="col-3">
         <div class="card mb-4 box-shadow">
             <div class="card-header">
-                <h4 class="my-0 font-weight-normal">{{ object_list.name }}</h4>
+                <h4 class="my-0 font-weight-normal">{{ object.name }}</h4>
             </div>
             <div class="card-body">
                 <img class="card-img-top"
-                     src="{% mymedia object_list.image %}"
+                     src="{% mymedia object.image %}"
                      alt="Card image cap">
-                <p class="card-text">Стоимость: {{ object_list.price }} р</p>
-                <p class="card-text">Описание: {{ object_list.description | truncatechars:100}}</p>
+                <p class="card-text">Стоимость: {{ object.price }} р</p>
+                <p class="card-text">Описание: {{ object.description | truncatechars:100}}</p>
             </div>
         </div>
     </div>

@@ -1,0 +1,30 @@
+{% extends 'catalog/base.html' %}
+{% load image_tag %}
+{% block content %}
+
+<a class="btn btn-outline-primary" href="{% url 'materials:create' %}"> Добавить статью </a>
+
+
+{% for object in object_list %}
+<div class="row text-center">
+    <div class="col-6">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">{{ object.name }}</h4>
+            </div>
+            <div class="card-body">
+                <img class="card-img-top"
+                     src="{% mymedia object.image %}"
+                     alt="Card image cap">
+                <p class="card-text">Содержимое: {{ object.body }} </p>
+                <p class="card-text">Дата создания: {{ object.created_at }} </p>
+                <a href="{% url 'materials:view' object.pk %}" class="btn btn-primary">Подробнее</a>
+                <a href="{% url 'materials:edit' object.pk %}" class="btn btn-success">Редактировать</a>
+                <a href="{% url 'materials:delete' object.pk %}" class="btn btn-danger">Удалить</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
