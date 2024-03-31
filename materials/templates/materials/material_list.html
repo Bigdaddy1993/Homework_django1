@@ -2,7 +2,9 @@
 {% load image_tag %}
 {% block content %}
 
-<a class="btn btn-outline-primary" href="{% url 'materials:create' %}"> Добавить статью </a>
+<div class="col-12 mb-5">
+    <a class="btn btn-outline-primary" href="{% url 'materials:create' %}"> Добавить статью </a>
+</div>
 
 
 {% for object in object_list %}
