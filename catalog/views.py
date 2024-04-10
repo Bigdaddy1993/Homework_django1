@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -44,11 +45,15 @@ class ProductDetailView(DetailView):
     model = Product
     template_name = 'catalog/product_detail.html'
 
+    login_url = reverse_lazy('users:login')
 
-class ProductCreateView(CreateView):
+
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:home')
+
+    login_url = reverse_lazy('users:login')
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
@@ -71,10 +76,12 @@ class ProductCreateView(CreateView):
         return super().form_valid(form)
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:home')
+
+    login_url = reverse_lazy('users:login')
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)

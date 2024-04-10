@@ -10,7 +10,7 @@
         </div>
         <div class="card-header"></div>
         <div class="card-body">
-            <form method="post">
+            <form method="post" enctype="multipart/form-data" class="form-floating">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <div class="col-12">
