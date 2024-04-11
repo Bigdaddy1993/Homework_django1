@@ -9,7 +9,9 @@ from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
-class ProductView(View):
+class ProductView(LoginRequiredMixin, View):
+    login_url = reverse_lazy('users:login')
+
     def get(self, request):
         return render(request, 'catalog/contacts.html')
 
@@ -21,9 +23,11 @@ class ProductView(View):
         return render(request, 'catalog/contacts.html')
 
 
-class ProductListView(ListView):
+class ProductListView(LoginRequiredMixin, ListView):
     model = Product
     template_name = 'catalog/product_list.html'
+
+    login_url = reverse_lazy('users:login')
 
     def get_context_data(self, *args, **kwargs):
         context_data = super().get_context_data(*args, **kwargs)
@@ -66,13 +70,15 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
         return context_data
 
     def form_valid(self, form):
-        context_data = self.get_context_data()
-        formset = context_data['formset']
         self.object = form.save()
+        self.object.owner = self.request.user
+        self.object.save()
 
-        if formset.is_valid():
-            formset.instance = self.object
-            formset.save()
+        context_data = self.get_context_data().get('formset')
+
+        if context_data.is_valid():
+            context_data.instance = self.object
+            context_data.save()
         return super().form_valid(form)
 
 

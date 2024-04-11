@@ -19,6 +19,7 @@
                 <p class="card-text">Категория: {{ object.category }} </p>
                 <p class="card-text">Описание: {{ object.description | truncatechars:100}}</p>
                 <p class="card-text">Версия: {{ object.active_versions | truncatechars:100}}</p>
+                <p class="card-text">Владелец: {{ object.owner }}</p>
                 <a href="{% url 'catalog:product_from_pk' object.pk %}" type="button" class="btn btn-outline-primary">Подробнее</a>
                 <a href="{% url 'catalog:update_product' object.pk %}" type="button" class="btn btn-outline-primary">Редактировать</a>
                 <a href="{% url 'catalog:delete_product' object.pk %}" type="button" class="btn btn-outline-danger">Удалить</a>

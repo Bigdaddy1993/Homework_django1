@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.template.defaultfilters import slugify
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -22,8 +23,9 @@ class MaterialCreateView(CreateView):
         return context
 
 
-class MaterialListView(ListView):
+class MaterialListView(LoginRequiredMixin, ListView):
     model = Material
+    login_url = reverse_lazy('users:login')
 
     def get_queryset(self):
         queryset = super().get_queryset()
