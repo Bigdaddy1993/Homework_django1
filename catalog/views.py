@@ -1,3 +1,6 @@
+from django.conf import settings
+from django.core.cache import cache
+
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 from django.forms import inlineformset_factory
 from django.shortcuts import render
@@ -7,6 +10,8 @@ from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
 from catalog.models import Product, Version
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
+from catalog.services import get_cached_subjects_for_products
 
 
 class ProductView(LoginRequiredMixin, View):
@@ -50,6 +55,12 @@ class ProductDetailView(DetailView):
     template_name = 'catalog/product_detail.html'
 
     login_url = reverse_lazy('users:login')
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+
+        context_data['subjects'] = get_cached_subjects_for_products(self.object.pk)
+        return context_data
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
